@@ -1,88 +1,62 @@
 package com.springmvc.cautrucdulieu.entity;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name = "order")
+@Table(name = "orderr")
 public class Order {
-    
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_order")
-	private int idorder;
-    
-	@Column(name = "orderdate")
-	private String orderdate;
-	
-	@Column(name = "totalprice")
-	private float totalprice;
-	
-	@Column(name = "address")
-	private String address;
-    
-	@OneToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name="order_detail_id")
-	private OrderDetail orderDetail;
-	
-	public int getIdorder() {
-		return idorder;
+	private int id_order;
+
+	@Column(name = "date")
+	private Date date;
+
+	@Column(name = "status")
+	private String status;
+
+	public Order(int id_order, Date date, String status) {
+		super();
+		this.id_order = id_order;
+		this.date = date;
+		this.status = status;
 	}
 
-	public void setIdorder(int idorder) {
-		this.idorder = idorder;
+	public int getId_order() {
+		return id_order;
 	}
 
-	public String getOrderdate() {
-		return orderdate;
+	public void setId_order(int id_order) {
+		this.id_order = id_order;
 	}
 
-	public void setOrderdate(String orderdate) {
-		this.orderdate = orderdate;
+	public Date getDate() {
+		return date;
 	}
 
-	public float getTotalprice() {
-		return totalprice;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public void setTotalprice(float totalprice) {
-		this.totalprice = totalprice;
+	public String getStatus() {
+		return status;
 	}
 
-	public String getAddress() {
-		return address;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public Order() {
+		super();
 	}
-	
-	/**
-	 * @return the instructorDetail
-	 */
-	public OrderDetail getOrderDetail() {
-		return orderDetail;
-	}
-
-	/**
-	 * @param instructorDetail the instructorDetail to set
-	 */
-	public void setOrderDetail(OrderDetail orderDetail) {
-		this.orderDetail = orderDetail;
-	}
-	
-	@OneToMany(mappedBy = "order")
-    private List<OrderDetail> orderDetails = new ArrayList<>();
 
 }

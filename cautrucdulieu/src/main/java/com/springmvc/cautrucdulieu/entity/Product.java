@@ -1,15 +1,11 @@
 package com.springmvc.cautrucdulieu.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,27 +14,29 @@ import javax.persistence.Table;
 public class Product {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-  @Column(name = "id_product")
-	private int idproduct;
-	
-   @Column(name = "name")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_product")
+	private int id_product;
+
+	@Column(name = "name")
 	private String name;
-   
-   @Column(name = "price")
+	
+	@Column(name = "price")
 	private float price;
-   
-   @Column(name = "image")
+	
+	@Column(name = "image")
 	private String image;
 
+	@ManyToOne
+	@JoinColumn(name = "id_producttype", referencedColumnName = "id_producttype")
+	private Producttype producttype;
 
-	public int getIdproduct() {
-		return idproduct;
+	public int getId_product() {
+		return id_product;
 	}
 
-	public void setIdproduct(int idproduct) {
-		this.idproduct = idproduct;
+	public void setId_product(int id_product) {
+		this.id_product = id_product;
 	}
 
 	public String getName() {
@@ -65,18 +63,25 @@ public class Product {
 		this.image = image;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public Producttype getProducttype() {
+		return producttype;
 	}
 
-	@ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-	
-	 @ManyToMany(mappedBy = "product")
-	    private List<ProductTag> productTags = new ArrayList<>();
+	public void setProducttype(Producttype producttype) {
+		this.producttype = producttype;
+	}
+
+	public Product(int id_product, String name, float price, String image, Producttype producttype) {
+		super();
+		this.id_product = id_product;
+		this.name = name;
+		this.price = price;
+		this.image = image;
+		this.producttype = producttype;
+	}
+
+	public Product() {
+		super();
+	}
 
 }
